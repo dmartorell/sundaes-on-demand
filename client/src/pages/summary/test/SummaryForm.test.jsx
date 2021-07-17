@@ -11,9 +11,7 @@ describe('Given a SummaryForm component', () => {
   test('When the checkbox is unchecked confirm order button should be disabled', () => {
     fireEvent.click(checkInput);
     expect(button).toBeEnabled();
-  });
-  test('When the checkbox is checked confirm order button should be enabled', () => {
     fireEvent.click(checkInput);
-    expect(button).toBeEnabled();
+    expect(button).toBeDisabled();
   });
 });
