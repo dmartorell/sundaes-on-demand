@@ -1,5 +1,6 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import SummaryForm from '../SummaryForm';
 
@@ -9,9 +10,14 @@ describe('Given a SummaryForm component', () => {
   const button = screen.getByRole('button', { name: /confirm order/i });
 
   test('When the checkbox is unchecked confirm order button should be disabled', () => {
-    fireEvent.click(checkInput);
+    userEvent.click(checkInput);
     expect(button).toBeEnabled();
-    fireEvent.click(checkInput);
+    userEvent.click(checkInput);
     expect(button).toBeDisabled();
+  });
+  test('When the component is rendered popover should not be in the document', () => {
+    render(<SummaryForm />);
+    const popOver = screen.getByRole('tooltip');
+    expect(popOver).not.toBeInTheDocument();
   });
 });
